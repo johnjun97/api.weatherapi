@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("partials/header.ejs") %>
+    <h1>H1</h1>
+  </head>
+  <body>
+    <% if (typeof errorMessage !== 'undefined') {  //if errorMessage is undefined%>
+      <div style="color: red;">
+        <strong>Error:</strong> <%= errorMessage %>
+      </div>
+    <% } else if (data) { // if data exist %>
+      <div>
+        <h2>Location: <%= data.location.name %>, <%= data.location.region %>, <%= data.location.country %></h2>
+        <p>Latitude and Longitude: <%= data.location.lat %>, <%= data.location.lon %></p>
+        <p>Temperature: <%= data.current.temp_c %>°C</p>
+        <p>Condition: <%= data.current.condition.text %></p>
+        <img src="<%= data.current.condition.icon %>" alt="Weather Icon" />
+        <p>Last Update: <%= data.current.last_updated %></p>
+        <p>Powered by: WeatherAPI.com</p>
+      </div>
+    <% } else { %>
+      <p>No weather data available.</p>
+    <% } %>
+    
+    <%- include("partials/footer.ejs") %>
+  </body>
+</html>
